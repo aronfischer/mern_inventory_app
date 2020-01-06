@@ -10,20 +10,20 @@ router.route("/").get((req, res) => {
 
 // Add a new item
 router.route("/create").post((req, res) => {
-  const itemName = req.body.item;
-  const itemAmount = req.body.amount;
-  const itemCategory = req.body.category;
+  const item = req.body.item;
+  const amount = req.body.amount;
+  const category = req.body.category;
 
-  const newInventory = {
-    item: itemName,
-    amount: itemAmount,
-    category: itemCategory
-  };
+  const newInventory = new Inventory({
+    item,
+    amount,
+    category
+  });
 
   newInventory
     .save()
-    .then(() => res.json("Inventory added!"))
-    .catch(err => res.status(400).json("Error :" + err));
+    .then(() => res.json("Item added!"))
+    .catch(err => res.status(400).json("Error: " + err));
 });
 
 // Update an item
@@ -46,3 +46,5 @@ router.route("/:id").delete((req, res) => {
     .then(item => res.json("Item Deleted"))
     .catch(err => res.status(400).json("Error :" + err));
 });
+
+module.exports = router;
