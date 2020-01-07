@@ -13,6 +13,9 @@ class Overview extends Component {
     this.state = {
       items: []
     };
+
+    this.onDeleteItem = this.onDeleteItem.bind(this);
+    this.onEditItem = this.onEditItem.bind(this);
   }
 
   componentDidMount() {
@@ -28,6 +31,18 @@ class Overview extends Component {
       });
   }
 
+  onDeleteItem = id => {
+    axios.delete("http://localhost:4000/inventory/" + id).then(response => {
+      console.log(response.data);
+    });
+
+    this.setState({
+      items: this.state.items.filter(item => item._id !== id)
+    });
+  };
+
+  onEditItem = id => {};
+
   render() {
     return (
       <div className='container'>
@@ -38,12 +53,19 @@ class Overview extends Component {
               <th scope='col'>Item</th>
               <th scope='col'>Amount</th>
               <th scope='col'>Category</th>
-              <th scope='col'>Edit / Delete</th>
+              <th scope='col'>Delete / Edit</th>
             </tr>
           </thead>
           <tbody>
             {this.state.items.map(item => {
-              return <Item key={item._id} item={item} />;
+              return (
+                <Item
+                  key={item._id}
+                  item={item}
+                  onDeleteItem={this.onDeleteItem}
+                  onEditItem={this.onEditItem}
+                />
+              );
             })}
           </tbody>
         </table>

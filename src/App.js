@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Overview from "./components/Overview";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddItem from "./components/Add_Item";
+import EditItem from "./components/Edit_Item";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <br />
       <Route exact path='/' component={Overview}></Route>
       <Route path='/create' component={AddItem}></Route>
+      <Route path='/update/:id' component={EditItem}></Route>
     </Router>
   );
 }

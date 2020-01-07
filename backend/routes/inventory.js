@@ -29,7 +29,16 @@ router.route("/create").post((req, res) => {
 // Update an item
 router.route("/update/:id").post((req, res) => {
   Inventory.findById(req.params.id)
-    .then(item => res.json(item))
+    .then(item => {
+      item.item = req.body.item;
+      item.amount = req.body.amount;
+      item.category = req.body.category;
+
+      item
+        .save()
+        .then(res.json("Item updated"))
+        .catch(err => res.status(400).json("Error: " + err));
+    })
     .catch(err => res.status(400).json("Error: " + err));
 });
 

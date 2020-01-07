@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Item(props) {
   return (
@@ -9,12 +10,19 @@ function Item(props) {
         <td>{props.item.amount}</td>
         <td>{props.item.category}</td>
         <td>
-          <div className='ml-4 d-inline-block'>
+          <div
+            className='ml-4 d-inline-block'
+            onClick={() => props.onDeleteItem(props.item._id)}
+          >
             <i className='far fa-trash-alt'></i>
           </div>
-          <div className='ml-4 d-inline-block'>
+          <Link
+            to={"/update/" + props.item._id}
+            className='ml-4 d-inline-block text-dark'
+            onClick={() => props.onEditItem(props.item._id)}
+          >
             <i className='fas fa-edit'></i>
-          </div>
+          </Link>
         </td>
       </tr>
     </React.Fragment>
