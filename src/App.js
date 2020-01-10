@@ -5,6 +5,7 @@ import Overview from "./components/Overview";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddItem from "./components/Add_Item";
 import EditItem from "./components/Edit_Item";
+import AddAdmin from "./components/Add_Admin";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route exact path='/' component={Overview}></Route>
       <Route path='/create' component={AddItem}></Route>
       <Route path='/update/:id' component={EditItem}></Route>
+      <Route path='/admin/create' component={AddAdmin}></Route>
     </Router>
   );
 }

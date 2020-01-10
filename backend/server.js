@@ -18,7 +18,9 @@ mongoose.connect(uri, {
 });
 
 const inventoryRouter = require("./routes/inventory");
+const adminRouter = require("./routes/admin");
 app.use("/inventory", inventoryRouter);
+app.use("/admin", adminRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
